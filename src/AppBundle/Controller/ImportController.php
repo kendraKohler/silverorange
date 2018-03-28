@@ -21,14 +21,14 @@ class ImportController
 
     	// Create most model using json data
     	$postModel = new PostModel(
-    		$postData.id,
-    		$postData.title,
-    		$postData.body,
-    		$postData.created_at,
-    		$postData.modified_at,
-    		$postData.author);
+    		$postData->id,
+    		$postData->title,
+    		$postData->body,
+    		$postData->created_at,
+    		$postData->modified_at,
+    		$postData->author);
 
-    	error_log('POST MODEL: ' . print_r($postModel,1));
+    	error_log('POST MODEL ID: ' . print_r($postModel->id(),1));
     }
 }
 
