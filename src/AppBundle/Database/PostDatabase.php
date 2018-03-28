@@ -54,7 +54,6 @@ class PostDatabase
         //Populate post model
         //$postModel = new PostModel();
             //$model->setId($row['id']);
-        }
         return 'DATABASE FUNCTIONALITY TO BE ADDED';
     }
 }
