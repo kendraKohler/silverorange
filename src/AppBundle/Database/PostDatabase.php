@@ -62,7 +62,7 @@ class PostDatabase
                 FROM posts p JOIN authors a ON p.author = a.id
                 ');
 
-            $stmt->bindParam(':id',$id);
+            //$stmt->bindParam(':id',$id);
             $stmt->execute();
             $result = $stmt->fetch();
         }
