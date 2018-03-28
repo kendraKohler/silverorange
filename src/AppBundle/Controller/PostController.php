@@ -6,13 +6,17 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 
+use AppBundle\Database\PostDatabase;
+
 class PostController
 {
 	private $templating;
+	private $postDatabase;
 
-	public function __construct(EngineInterface $templating)
+	public function __construct(EngineInterface $templating, PostDatabase $postDatabase)
 	{
 		$this->templating = $templating;
+		$this->postDatabase = $postDatabase;
 	}
 
     public function indexAction(Request $request)
@@ -22,6 +26,10 @@ class PostController
 
     public function getIdAction(Request $request)
     {
-        return $this->templating->renderResponse('default/postId.html.twig');
+    	$id = $request->attributes->get('id');
+
+    	error_log('ID is: ' . $id);
+    	$postModel = $this->postDatabase->getPostById($id);
+        return $this->templating->renderResponse('default/postId.html.twig',{'postModel' => $postModel});
     }
 }

@@ -37,4 +37,9 @@ class PostDatabase
             error_log("ERROR: " . $e->getMessage());
         }
     }
+
+    public function getPostById($id)
+    {
+        'DATABASE FUNCTIONALITY TO BE ADDED';
+    }
 }
