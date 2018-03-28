@@ -21,6 +21,9 @@ class PostController
 
     public function indexAction(Request $request)
     {
+    	$allPosts = $this->postDatabase->getAllPosts();
+
+    	error_log('ALL POSTS: '.print_r($allPosts,1));
         return $this->templating->renderResponse('default/post.html.twig');
     }
 
