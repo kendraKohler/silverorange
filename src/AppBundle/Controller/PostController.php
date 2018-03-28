@@ -55,6 +55,8 @@ class PostController
     	$viewData = [];
     	$sortedModels = $this->orderPosts($postModels);
 
+    	error_log('SORTED MODELS: ' . print_r($sortedModels));
+
     	foreach($sortedModels as $currentModel)
     	{
     		array_push($viewData,[
