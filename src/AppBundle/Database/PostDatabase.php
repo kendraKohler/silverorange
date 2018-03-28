@@ -95,7 +95,7 @@ class PostDatabase
 
     private function checkPostExists($id)
     {
-        $stmt = $this->connection->prepare('SELECT 1 FROM posts WHERE id = :id');
+        $stmt = $this->connection->prepare('SELECT COUNT(id) FROM posts WHERE id = :id');
 
         $stmt->bindParam(':id',$id);
         $stmt->execute();
