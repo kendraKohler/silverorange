@@ -62,7 +62,7 @@ class PostDatabase
 
         $stmt->bindParam(':id',$id);
         $stmt->execute();
-        $result = $stmt->fetch();
+        $result = $stmt->fetchAll();
 
         error_log("Result from query is: " . print_r($result,1));
 
