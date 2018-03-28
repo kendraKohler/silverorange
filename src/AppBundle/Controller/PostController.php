@@ -26,7 +26,7 @@ class PostController
     	$allPostsViewData = $this->prepareAllPostsForView($allPosts);
 
     	error_log('ALL POSTS: '.print_r($allPosts,1));
-        return $this->templating->renderResponse('default/post.html.twig',$allPostsViewData);
+        return $this->templating->renderResponse('default/post.html.twig',['posts' => $allPostsViewData]);
     }
 
     public function getIdAction(Request $request)

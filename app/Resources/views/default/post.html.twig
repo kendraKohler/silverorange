@@ -3,7 +3,12 @@
 {% block body %}
     <div id="wrapper">
         <div id="container">
-            <h1> Post Page </h1>
+            <h1> Get All Posts Page </h1>
+            {% for post in posts %}
+             	<strong>Title</strong>: {{ post.title }}
+            	<strong>Body</strong>: {{ post.body }}
+            	<strong>Author</strong>: {{ post.authorName }}}}
+            {% endfor %}
         </div>
     </div>
 {% endblock %}
