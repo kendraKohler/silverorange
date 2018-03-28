@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 
 use AppBundle\Database\PostDatabase;
 
+//Removes all rows in post table
 class DeleteController
 {
 	private $templating;

@@ -14,6 +14,9 @@ Get all posts in reverse chronological order of created at data:
 https://silverorange.herokuapp.com/post
 - If you inspect the html on this page above each title there will be a comment with the created date
 
+Delete all rows in the post table:
+https://silverorange.herokuapp.com/delete
+
 A few more things I skipped because of time constraint:
 - Writing tests
 - Most Error handling (example posts having valid author ids)
@@ -24,6 +27,8 @@ A few more things I skipped because of time constraint:
 
 I would normally use ORM for database handling with Symfony, however I realize the need to see lower 
 level database coding for this test so it was implemented that way.
+
+I did not remove any of the default skeleton that comes with symfony in, for example "DefaultController"
 
 
 Symfony Standard Edition

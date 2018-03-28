@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 
 use AppBundle\Database\PostDatabase;
 
+// Displays all posts as well as post by id
 class PostController
 {
 	private $templating;

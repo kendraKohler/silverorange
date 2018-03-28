@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Model\PostModel;
 use AppBundle\Database\PostDatabase;
 
-
+//Imports post data to database, can not be hit by GET
 class ImportController
 {
 	private $postDatabase;
