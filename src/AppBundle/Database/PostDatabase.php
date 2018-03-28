@@ -61,7 +61,10 @@ class PostDatabase
             WHERE p.id = :id');
 
         $stmt->bindParam(':id',$id);
-        $result = $stmt->execute();
+        $stmt->execute();
+        $result = $stmt->fetch();
+
+        error_log("Result from query is: " . print_r($result,1));
 
 
         //Populate author model
