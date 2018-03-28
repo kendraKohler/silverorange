@@ -5,6 +5,7 @@
         <div id="container">
             <h1> Get All Posts Page </h1>
             {% for post in posts %}
+            	<!-- CREATED DATE - {{ post.created }} -->
              	<strong>Title</strong>: {{ post.title }}<br/>
             	<strong>Body</strong>: {{ post.body }}<br/>
             	<strong>Author</strong>: {{ post.authorName }}

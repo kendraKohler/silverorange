@@ -61,7 +61,8 @@ class PostController
     		array_push($viewData,[
     			'title' => $currentModel->title(),
         		'body' => $currentModel->body(),
-        		'authorName' =>$currentModel->author()->fullName()]);
+        		'authorName' =>$currentModel->author()->fullName(),
+        		'created' => $currentModel->createdAt()]);
     	}
     	return $viewData;
     }
