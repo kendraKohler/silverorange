@@ -6,3 +6,8 @@ post:
     path: /post
     defaults: { _controller: app.post:indexAction }
     methods: [GET]
+
+import:
+    path: /import
+    defaults: { _controller: app.import:indexAction }
+    methods: [POST]
