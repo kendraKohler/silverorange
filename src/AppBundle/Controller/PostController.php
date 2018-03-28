@@ -30,9 +30,11 @@ class PostController
 
     	$postModel = $this->postDatabase->getPostById($id);
 
-    	error_log("POST MODEL TITLE: ".$postModel->title());
-    	error_log("POST MODEL BODY: ".$postModel->body());
-    	error_log("POST MODEL AUTHOR NAME: ".$postModel->author()->fullName());
+    	error_log('POST MODEL: '.print_r($postModel,1));
+
+    	//error_log("POST MODEL TITLE: ".$postModel->title());
+    	//error_log("POST MODEL BODY: ".$postModel->body());
+    	//error_log("POST MODEL AUTHOR NAME: ".$postModel->author()->fullName());
 
         return $this->templating->renderResponse('default/postId.html.twig',[
         	'title' => $postModel->title(),
