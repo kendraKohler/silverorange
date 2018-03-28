@@ -33,3 +33,8 @@ services:
     # AppBundle\Service\ExampleService:
     #     arguments:
     #         $someArgument: 'some_value'
+
+    # post controller set as service
+    app.post: 
+        class: AppBundle\Controller\PostController
+        arguments: ["@templating"]
