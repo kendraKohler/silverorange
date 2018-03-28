@@ -28,8 +28,10 @@ class PostController
     {
     	$id = $request->attributes->get('id');
 
-    	error_log('ID is: ' . $id);
     	$postModel = $this->postDatabase->getPostById($id);
-        return $this->templating->renderResponse('default/postId.html.twig',['postModel' => $postModel]);
+        return $this->templating->renderResponse('default/postId.html.twig',[
+        	'title' => $postModel->title(),
+        	'body' => $postModel->body(),
+        	'authorName' =>$postModel->author()->fullName()]);
     }
 }
