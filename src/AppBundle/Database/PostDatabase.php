@@ -63,7 +63,6 @@ class PostDatabase
         $stmt->bindParam(':id',$id);
         $result = $stmt->execute();
 
-        error_log('ROW DATA FETCHED ON JOIN: ' . print_r($result,1));
 
         //Populate author model
         $authorModel = new AuthorModel();
