@@ -24,20 +24,17 @@ class ImportController
     	$jsonData = $request->getContent();
     	$postData = json_decode($jsonData);
 
-    	error_log('DECODED DATA IS: ' . print_r($postData,1));
 
 		//Loop through data if array is sent
     	if(is_array($postData))
     	{
     		foreach($postData as $currentData)
     		{
-    			error_log('IN ARRAY SAVING: '.print_r($currentData,1));
     			$this->saveToDatabase($currentData);
     		}
     	}
     	else
     	{
-    		error_log('SAVING ONE ITEM: '.print_r($postData,1));
     		$this->saveToDatabase($postData);
     	}
 
