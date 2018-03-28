@@ -39,7 +39,9 @@ class PostDatabase
         $stmt->bindParam(':modified_at',$postModel->modifiedAt());
         $stmt->bindParam(':author',$postModel->author());
 
-        $stmt->execute();
+        $result = $stmt->execute();
+
+        error_log("RESULT: " . print_r($result,1));
     }
 
     public function getPostById($id)

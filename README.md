@@ -16,12 +16,11 @@ https://silverorange.herokuapp.com/post
 
 A few more things I skipped because of time constraint:
 - Writing tests
-- Most Error handling
+- Most Error handling (example posts having valid author ids)
 - Most Constraint checking
 - Styling Front End
 - Configuration based off environment (dev, stage, etc), this was assumed to be production for the most part
 
-I assumed that all posts sent contained valid author ids.
 
 I would normally use ORM for database handling with Symfony, however I realize the need to see lower 
 level database coding for this test so it was implemented that way.
