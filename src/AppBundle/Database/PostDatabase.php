@@ -108,8 +108,6 @@ class PostDatabase
         $stmt = $this->connection->prepare('delete from posts;');
 
         $result = $stmt->execute();
-
-        error_log('result is: ' . print_r($result));
         return true;
     }
 
