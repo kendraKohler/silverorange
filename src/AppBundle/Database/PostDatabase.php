@@ -66,7 +66,7 @@ class PostDatabase
 
             $stmt->bindParam(':id',$id);
             $stmt->execute();
-            $result = $stmt->fetchAll();
+            $result = $stmt->fetch();
         }
         catch(Exception $e)
         {
