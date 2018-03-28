@@ -19,12 +19,18 @@ class PostDatabase
 
     public function savePost(PostModel $postModel)
     {
-        error_log('ABOUT TO SAVE POST');
         $exists = $this->checkPostExists($postModel->id());
-        error_log('EXISTS IS: ' . $exists);
 
-        $stmt = $this->connection->prepare("INSERT INTO posts (id, title, body, created_at, modified_at, author) 
-        VALUES (:id, :title, :body, :created_at, :modified_at, :author)");
+        if($exists)
+        {
+            $stmt = $this->connection->prepare("UPDATE posts (id, title, body, created_at, modified_at, author) 
+                = (:id, :title, :body, :created_at, :modified_at, :author)");
+        }
+        else
+        {
+            $stmt = $this->connection->prepare("INSERT INTO posts (id, title, body, created_at, modified_at, author) 
+                VALUES (:id, :title, :body, :created_at, :modified_at, :author)");
+        }
 
         $stmt->bindParam(':id',$postModel->id());
         $stmt->bindParam(':title',$postModel->title());
@@ -101,7 +107,11 @@ class PostDatabase
         $stmt->execute();
         $result = $stmt->fetch();
 
-        error_log('RESULT IS: ' .print_r($result,1) );
+        if($result['count'] >= 1)
+        {
+            return true;
+        }
+        return false;
     }
 
     private function setModels($result)
