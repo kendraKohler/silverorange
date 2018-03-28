@@ -60,17 +60,17 @@ class PostDatabase
                     a.created_at AS author_created_at,
                     a.modified_at AS author_modified_at
                 FROM posts p JOIN authors a ON p.author = a.id
-                WHERE p.id = :id');
+                ');
 
             $stmt->bindParam(':id',$id);
             $stmt->execute();
-            $result = $stmt->fetchAll();
+            $result = $stmt->fetch();
         }
         catch(Exception $e)
         {
             error_log("ERROR: " . $e->getMessage());
         }
-        
+
         error_log("Result from query is: " . print_r($result,1));
 
 
