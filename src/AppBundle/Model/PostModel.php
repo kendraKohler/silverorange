@@ -10,7 +10,7 @@ class PostModel
     private $modifiedAt;
     private $author;
 
-    public function __construct($id,$title,$body,$createdAt,$modifiedAt,$author)
+    public function __constructor($id,$title,$body,$createdAt,$modifiedAt,$author)
     {
         $this->id = $id;
         $this->title = $title;
