@@ -20,13 +20,14 @@ class ImportController
 	//Gets posted data and saves to the database
     public function indexAction(Request $request)
     {
-    	// Get json request data as object, otherwise save normally
+    	// Get json request data as object, decode to object
     	$jsonData = $request->getContent();
+    	$postData = json_decode($jsonData);
 
 		//Loop through data if array is sent
-    	if(is_array($jsonData))
+    	if(is_array($postData))
     	{
-    		foreach($jsonData as $currentData)
+    		foreach($postData as $currentData)
     		{
     			error_log('IN ARRAY SAVING: '.print_r($currentData,1));
     			$this->saveToDatabase($currentData);
@@ -34,35 +35,30 @@ class ImportController
     	}
     	else
     	{
-    		error_log('SAVING ONE ITEM: '.print_r($jsonData,1));
-    		$this->saveToDatabase($jsonData);
+    		error_log('SAVING ONE ITEM: '.print_r($postData,1));
+    		$this->saveToDatabase($postData);
     	}
 
     }
 
-	// Decode json data, store in model and save to database
+	// Store in model and save to database
     private function saveToDatabase($data)
     {
-    	//Decode json data
-		$postData = json_decode($data);
 
-		if($postData)
-		{
-			// Create post model using json data
-	    	$postModel = new PostModel();
+		// Create post model using json data
+    	$postModel = new PostModel();
 
-	    	//Issue with symfony constructor work around
-	    	$postModel->initialize(
-	    		$postData->id,
-	    		$postData->title,
-	    		$postData->body,
-	    		$postData->created_at,
-	    		$postData->modified_at,
-	    		$postData->author);
+    	//Issue with symfony constructor work around
+    	$postModel->initialize(
+    		$postData->id,
+    		$postData->title,
+    		$postData->body,
+    		$postData->created_at,
+    		$postData->modified_at,
+    		$postData->author);
 
-	    	// Save to database
-	    	$this->postDatabase->savePost($postModel);
-		}
+    	// Save to database
+    	$this->postDatabase->savePost($postModel);
     }
 }
 
