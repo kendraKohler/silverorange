@@ -10,6 +10,7 @@ class ImportController
 
     public function indexAction(Request $request)
     {
-        error_log('HITTING POST CONTROLLER');
+    	$jsonData = $request.getContent();
+        error_log('JSON DATA IS: '.$jsonData);
     }
 }
