@@ -19,6 +19,7 @@ class PostDatabase
 
     public function savePost(PostModel $postModel)
     {
+        $exists = $this->checkPostExists($postModel->id());
         $stmt = $this->connection->prepare("INSERT INTO posts (id, title, body, created_at, modified_at, author) 
         VALUES (:id, :title, :body, :created_at, :modified_at, :author)");
 
@@ -87,6 +88,17 @@ class PostDatabase
         }
 
         return $models;
+    }
+
+    private function checkPostExists($id)
+    {
+        $stmt = $this->connection->prepare('SELECT exists(SELECT 1 FROM posts WHERE id = :id');
+
+        $stmt->bindParam(':id',$id);
+        $stmt->execute();
+        $result = $stmt->fetch();
+
+        error_log('RESULT IS: ' .print_r($result,1) );
     }
 
     private function setModels($result)
