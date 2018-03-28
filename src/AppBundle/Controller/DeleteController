@@ -22,7 +22,7 @@ class DeleteController
 	//Gets all post data, renders view and passes in data for view
     public function indexAction(Request $request)
     {
-    	$result = $this->postDatabase->deleteALlPosts();
+    	$result = $this->postDatabase->deleteAllPosts();
 
         return $this->templating->renderResponse('default/delete.html.twig',['deleted' => $result]);
     }

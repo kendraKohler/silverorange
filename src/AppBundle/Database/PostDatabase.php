@@ -103,6 +103,16 @@ class PostDatabase
         return $models;
     }
 
+    public function deleteAllPosts()
+    {
+        $stmt = $this->connection->prepare('delete from posts;');
+
+        $result = $stmt->execute();
+
+        error_log('result is: ' . print_r($result));
+        return true;
+    }
+
     private function checkPostExists($id)
     {
         $stmt = $this->connection->prepare('SELECT COUNT(id) FROM posts WHERE id = :id');
