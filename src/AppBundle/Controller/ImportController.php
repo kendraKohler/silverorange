@@ -28,11 +28,13 @@ class ImportController
     	{
     		foreach($jsonData as $currentData)
     		{
+    			error_log('IN ARRAY SAVING: '.print_r($currentData,1));
     			$this->saveToDatabase($currentData);
     		}
     	}
     	else
     	{
+    		error_log('SAVING ONE ITEM: '.print_r($jsonData,1));
     		$this->saveToDatabase($jsonData);
     	}
 
