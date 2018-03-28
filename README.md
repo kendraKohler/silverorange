@@ -1,3 +1,29 @@
+Silverorange
+========================
+
+Save posts to the database:
+The url to post to is - https://silverorange.herokuapp.com/import
+It must be a POST, GET will not be accepted
+I have been using https://apitester.com/ for testing
+Note that one or many post files can be accepted at once (takes array of objects or a single object) 
+
+Get single post by id:
+https://silverorange.herokuapp.com/post/{uuid}
+
+Get all posts in reverse chronological order of created at data:
+https://silverorange.herokuapp.com/post
+
+A few more things I skipped because of time constraint:
+- Writing tests
+- Most Error handling
+- Most Constraint checking
+- Styling Front End
+- Configuration based off environment (dev, stage, etc), this was assumed to be production for the most part
+
+I would normally use ORM for database handling with Symfony, however I realize the need to see lower 
+level database coding for this test so it was implemented that way.
+
+
 Symfony Standard Edition
 ========================
 
