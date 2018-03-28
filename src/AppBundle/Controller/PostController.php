@@ -19,4 +19,9 @@ class PostController
     {
         return $this->templating->renderResponse('default/post.html.twig');
     }
+
+    public function getIdAction(Request $request)
+    {
+        return $this->templating->renderResponse('default/postId.html.twig');
+    }
 }

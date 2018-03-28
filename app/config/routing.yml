@@ -7,6 +7,11 @@ post:
     defaults: { _controller: app.post:indexAction }
     methods: [GET]
 
+post:
+    path: /post/{id}
+    defaults: { _controller: app.post:getIdAction }
+    methods: [GET]
+
 import:
     path: /import
     defaults: { _controller: app.import:indexAction }
