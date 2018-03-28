@@ -9,7 +9,9 @@ post:
 
 post:
     path: /post/{id}
-    defaults: { _controller: app.post:getIdAction }
+    defaults: 
+      _controller: app.post:getIdAction
+      id: 0
     methods: [GET]
 
 import:
