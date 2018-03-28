@@ -44,6 +44,11 @@ services:
         class: AppBundle\Controller\PostController
         arguments: ["@templating","@app.database.post"]
 
+   # post controller set as service
+    app.delete: 
+        class: AppBundle\Controller\DeleteController
+        arguments: ["@templating","@app.database.post"]
+
     # import controller set as service
     app.import: 
         class: AppBundle\Controller\ImportController

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="wrapper">
+        <div id="container">
+            <h1> Delete Page </h1>
+            {% if deleted %}
+            	<h1>Posts were deleted successfully </h1>
+            {% else %}
+                <h1>Posts were not deleted successfully </h1>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
