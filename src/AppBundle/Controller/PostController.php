@@ -23,8 +23,10 @@ class PostController
     {
     	$allPosts = $this->postDatabase->getAllPosts();
 
+    	$allPostsViewData = $this->prepareAllPostsForView($postModels);
+
     	error_log('ALL POSTS: '.print_r($allPosts,1));
-        return $this->templating->renderResponse('default/post.html.twig');
+        return $this->templating->renderResponse('default/post.html.twig',$allPostsViewData);
     }
 
     public function getIdAction(Request $request)
@@ -37,5 +39,28 @@ class PostController
         	'title' => $postModel->title(),
         	'body' => $postModel->body(),
         	'authorName' =>$postModel->author()->fullName()]);
+    }
+
+    private function orderPosts($postModels)
+    {
+    	$sorted = usort($postModels,
+    		function($a,$b)
+    		{
+    			return strcmp($a->createdAt(),$b->createdAt());    		})
+    }
+
+    private function prepareAllPostsForView($postModels)
+    {
+    	$viewData = [];
+    	$sortedModels = $this->orderPosts($postModels);
+
+    	foreach($sortedModels as $currentModel)
+    	{
+    		array_push($viewData,[
+    			'title' => $currentModel->title(),
+        		'body' => $currentModel->body(),
+        		'authorName' =>$currentModel->author()->fullName()]);
+    	}
+    	return $viewData;
     }
 }
