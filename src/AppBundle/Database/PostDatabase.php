@@ -20,6 +20,8 @@ class PostDatabase
     public function savePost(PostModel $postModel)
     {
         $exists = $this->checkPostExists($postModel->id());
+        error_log('EXISTS IS: ' . $exists);
+
         $stmt = $this->connection->prepare("INSERT INTO posts (id, title, body, created_at, modified_at, author) 
         VALUES (:id, :title, :body, :created_at, :modified_at, :author)");
 
