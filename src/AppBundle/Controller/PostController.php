@@ -30,6 +30,6 @@ class PostController
 
     	error_log('ID is: ' . $id);
     	$postModel = $this->postDatabase->getPostById($id);
-        return $this->templating->renderResponse('default/postId.html.twig',{'postModel' => $postModel});
+        return $this->templating->renderResponse('default/postId.html.twig',['postModel' => $postModel]);
     }
 }
