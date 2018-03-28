@@ -41,6 +41,7 @@ class PostDatabase
 
     public function getPostById($id)
     {
+        error_log('ID IS: '.$id);
         /*
          * Get post and it's author data by id
          * NOTE : although all data is not needed for this task, 
