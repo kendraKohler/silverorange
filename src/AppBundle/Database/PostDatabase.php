@@ -19,24 +19,17 @@ class PostDatabase
 
     public function savePost(PostModel $postModel)
     {
-        try
-        {
-            $stmt = $this->connection->prepare("INSERT INTO posts (id, title, body, created_at, modified_at, author) 
-            VALUES (:id, :title, :body, :created_at, :modified_at, :author)");
+        $stmt = $this->connection->prepare("INSERT INTO posts (id, title, body, created_at, modified_at, author) 
+        VALUES (:id, :title, :body, :created_at, :modified_at, :author)");
 
-            $stmt->bindParam(':id',$postModel->id());
-            $stmt->bindParam(':title',$postModel->title());
-            $stmt->bindParam(':body',$postModel->body());
-            $stmt->bindParam(':created_at',$postModel->createdAt());
-            $stmt->bindParam(':modified_at',$postModel->modifiedAt());
-            $stmt->bindParam(':author',$postModel->author());
+        $stmt->bindParam(':id',$postModel->id());
+        $stmt->bindParam(':title',$postModel->title());
+        $stmt->bindParam(':body',$postModel->body());
+        $stmt->bindParam(':created_at',$postModel->createdAt());
+        $stmt->bindParam(':modified_at',$postModel->modifiedAt());
+        $stmt->bindParam(':author',$postModel->author());
 
-            $stmt->execute();
-        }
-        catch(Exception $e)
-        {
-            error_log("ERROR: " . $e->getMessage());
-        }
+        $stmt->execute();
     }
 
     public function getPostById($id)
@@ -47,51 +40,26 @@ class PostDatabase
          * all data is grabbed so the model will contain everything
          * for any future needs.
          */
-        try
-        {
-            $stmt = $this->connection->prepare('
-                SELECT p.id AS post_id, 
-                    p.title AS post_title, 
-                    p.body AS post_body, 
-                    p.created_at AS post_created_at, 
-                    p.modified_at AS post_modified_at, 
-                    a.id AS author_id, 
-                    a.full_name AS author_full_name,
-                    a.created_at AS author_created_at,
-                    a.modified_at AS author_modified_at
-                FROM posts p JOIN authors a ON p.author = a.id
-                WHERE p.id = :id');
+        $stmt = $this->connection->prepare('
+            SELECT p.id AS post_id, 
+                p.title AS post_title, 
+                p.body AS post_body, 
+                p.created_at AS post_created_at, 
+                p.modified_at AS post_modified_at, 
+                a.id AS author_id, 
+                a.full_name AS author_full_name,
+                a.created_at AS author_created_at,
+                a.modified_at AS author_modified_at
+            FROM posts p JOIN authors a ON p.author = a.id
+            WHERE p.id = :id');
 
-            $stmt->bindParam(':id',$id);
-            $stmt->execute();
-            $result = $stmt->fetch();
-        }
-        catch(Exception $e)
-        {
-            error_log("ERROR: " . $e->getMessage());
-        }
+        $stmt->bindParam(':id',$id);
+        $stmt->execute();
+        $result = $stmt->fetch();
 
+        $model = $this->setModels($result);
 
-
-        //Populate author model
-        $authorModel = new AuthorModel();
-        $authorModel->initialize(
-            $result['author_id'],
-            $result['author_full_name'],
-            $result['author_created_at'],
-            $result['author_modified_at']);
-
-        //Populate post model
-        $postModel = new PostModel();
-        $postModel->initialize(
-            $result['post_id'],
-            $result['post_title'],
-            $result['post_body'],
-            $result['post_created_at'],
-            $result['post_modified_at'],
-            $authorModel);
-
-        return $postModel;
+        return $model;
     }
 
     public function getAllPosts()
@@ -100,24 +68,17 @@ class PostDatabase
         /*
          * Get all posts and their author data
          */
-        try
-        {
-            $result = $this->connection->query('
-                SELECT p.id AS post_id, 
-                    p.title AS post_title, 
-                    p.body AS post_body, 
-                    p.created_at AS post_created_at, 
-                    p.modified_at AS post_modified_at, 
-                    a.id AS author_id, 
-                    a.full_name AS author_full_name,
-                    a.created_at AS author_created_at,
-                    a.modified_at AS author_modified_at
-                FROM posts p JOIN authors a ON p.author = a.id');
-        }
-        catch(Exception $e)
-        {
-            error_log("ERROR: " . $e->getMessage());
-        }
+        $result = $this->connection->query('
+            SELECT p.id AS post_id, 
+                p.title AS post_title, 
+                p.body AS post_body, 
+                p.created_at AS post_created_at, 
+                p.modified_at AS post_modified_at, 
+                a.id AS author_id, 
+                a.full_name AS author_full_name,
+                a.created_at AS author_created_at,
+                a.modified_at AS author_modified_at
+            FROM posts p JOIN authors a ON p.author = a.id');
 
         foreach($result as $row)
         {
