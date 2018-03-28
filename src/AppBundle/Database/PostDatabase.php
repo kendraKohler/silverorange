@@ -82,6 +82,8 @@ class PostDatabase
             $result['post_modified_at'],
             $authorModel);
 
+        error_log("POST MODEL IN DB: " . print_r($postModel,1));
+
         return $postModel;
     }
 }
