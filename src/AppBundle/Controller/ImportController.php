@@ -19,8 +19,11 @@ class ImportController
     	$postData = json_decode($jsonData);
     	error_log('POST DATA ID: ' . $postData->id);
 
-    	// Create most model using json data
-    	$postModel = new PostModel(
+    	// Create post model using json data
+    	$postModel = new PostModel();
+
+    	//Issue with symfony constructor work around
+    	$postModel->initialize(
     		$postData->id,
     		$postData->title,
     		$postData->body,
@@ -28,7 +31,7 @@ class ImportController
     		$postData->modified_at,
     		$postData->author);
 
-    	error_log('POST MODEL ID: ' . print_r($postModel->id(),1));
+    	error_log('POST MODEL ID: ' . print_r($postModel,1));
     }
 }
 
