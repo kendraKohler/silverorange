@@ -47,3 +47,4 @@ services:
     # import controller set as service
     app.import: 
         class: AppBundle\Controller\ImportController
+        arguments: ["@app.database.post"]

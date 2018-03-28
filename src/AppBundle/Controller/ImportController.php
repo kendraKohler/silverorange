@@ -5,10 +5,17 @@ namespace AppBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 use AppBundle\Model\PostModel;
+use AppBundle\Database\PostDatabase;
 
 
 class ImportController
 {
+	private $postDatabase;
+
+	public function __construct(PostDatabase $postDatabase)
+	{
+		$this->postDatabase = $postDatabase;
+	}
 
     public function indexAction(Request $request)
     {
@@ -28,6 +35,9 @@ class ImportController
     		$postData->created_at,
     		$postData->modified_at,
     		$postData->author);
+
+    	// Save to database
+    	$this->postDatabase->savePost($postModel);
 
     }
 }
