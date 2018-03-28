@@ -20,7 +20,7 @@ class PostDatabase
     {
         try
         {
-            $stmt = $connection->prepare("INSERT INTO posts (id, title, body, created_at, modified_at, author) 
+            $stmt = $this->connection->prepare("INSERT INTO posts (id, title, body, created_at, modified_at, author) 
             VALUES (:id, :title, :body, :created_at, :modified_at, :author)");
 
             $stmt->bindParam(':id',$postModel->id());
