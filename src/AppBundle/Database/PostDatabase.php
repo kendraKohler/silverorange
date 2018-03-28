@@ -8,6 +8,7 @@ use Doctrine\ORM\Query\ResultSetMapping;
 use AppBundle\Model\PostModel;
 use AppBundle\Model\AuthorModel;
 
+//Deals with all database queries to do with the post table
 class PostDatabase
 {
 	private $connection;
@@ -17,19 +18,18 @@ class PostDatabase
 		$this->connection = $connection;
 	}
 
+    //Save or update post
     public function savePost(PostModel $postModel)
     {
         $exists = $this->checkPostExists($postModel->id());
 
         if($exists)
         {
-            error_log("UPDATING");
             $stmt = $this->connection->prepare("UPDATE posts SET (id, title, body, created_at, modified_at, author) 
                 = (:id, :title, :body, :created_at, :modified_at, :author)");
         }
         else
         {
-            error_log("ADDING");
             $stmt = $this->connection->prepare("INSERT INTO posts (id, title, body, created_at, modified_at, author) 
                 VALUES (:id, :title, :body, :created_at, :modified_at, :author)");
         }
@@ -46,6 +46,7 @@ class PostDatabase
         error_log("RESULT: " . print_r($result,1));
     }
 
+    //Get the post from database by id
     public function getPostById($id)
     {
         /*
@@ -65,17 +66,19 @@ class PostDatabase
                 a.created_at AS author_created_at,
                 a.modified_at AS author_modified_at
             FROM posts p JOIN authors a ON p.author = a.id
-            WHERE p.id = :id');
+            WHERE p.id = :id'); //TODO separate select part of 
+                                //statement out as it's used in getAllPosts as well
 
         $stmt->bindParam(':id',$id);
         $stmt->execute();
-        $result = $stmt->fetch();
+        $result = $stmt->fetch(); //assuming there will be no duplicates
 
         $model = $this->setModels($result);
 
         return $model;
     }
 
+    //Get all posts from database
     public function getAllPosts()
     {
         $models = [];
@@ -103,6 +106,7 @@ class PostDatabase
         return $models;
     }
 
+    //Delete ALL rows from post table
     public function deleteAllPosts()
     {
         $stmt = $this->connection->prepare('delete from posts;');
@@ -111,6 +115,7 @@ class PostDatabase
         return true;
     }
 
+    // Check if a post exists, boolean return
     private function checkPostExists($id)
     {
         $stmt = $this->connection->prepare('SELECT COUNT(id) FROM posts WHERE id = :id');
@@ -126,6 +131,7 @@ class PostDatabase
         return false;
     }
 
+    //Set models from database results
     private function setModels($result)
     {
         $authorModel = new AuthorModel();
