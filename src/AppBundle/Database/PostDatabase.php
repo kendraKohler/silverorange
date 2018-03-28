@@ -40,6 +40,6 @@ class PostDatabase
 
     public function getPostById($id)
     {
-        'DATABASE FUNCTIONALITY TO BE ADDED';
+        return 'DATABASE FUNCTIONALITY TO BE ADDED';
     }
 }
