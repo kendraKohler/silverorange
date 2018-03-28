@@ -4,7 +4,11 @@
     <div id="wrapper">
         <div id="container">
             <h1> Post ID Page </h1>
-            <h2> {{ dump(postModel) }} </h2>
+            <div>
+            	<strong>Title</strong>: {{ postModel.title }}
+            	<strong>Body</strong>: {{ postModel.body }}
+            	<strong>Author</strong>: {{ postModel.author.fullName }}
+            </div>
         </div>
     </div>
 {% endblock %}
