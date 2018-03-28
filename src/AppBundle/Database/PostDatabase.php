@@ -41,7 +41,6 @@ class PostDatabase
 
     public function getPostById($id)
     {
-        error_log('ID IS: '.$id);
         /*
          * Get post and it's author data by id
          * NOTE : although all data is not needed for this task, 
@@ -64,15 +63,26 @@ class PostDatabase
         $stmt->bindParam(':id',$id);
         $result = $stmt->execute();
 
-        error_log('ROW DATA FETCHED ON JOIN: ' . print_r($row,1));
+        error_log('ROW DATA FETCHED ON JOIN: ' . print_r($result,1));
 
         //Populate author model
-        //$authorModel = new AuthorModel();
-        //$authorModel->initialize();
+        $authorModel = new AuthorModel();
+        $authorModel->initialize(
+            $result['author_id'],
+            $result['author_full_name'],
+            $result['author_created_at'],
+            $result['author_modified_at']);
 
         //Populate post model
-        //$postModel = new PostModel();
-            //$model->setId($row['id']);
-        return 'DATABASE FUNCTIONALITY TO BE ADDED';
+        $postModel = new PostModel();
+        $postModel->initialize(
+            $result['post_id'],
+            $result['post_title'],
+            $result['post_body'],
+            $result['post_created_at'],
+            $result['post_modified_at'],
+            $authorModel);
+
+        return $postModel;
     }
 }
