@@ -62,8 +62,6 @@ class PostDatabase
                 FROM posts p JOIN authors a ON p.author = a.id
                 WHERE p.id = :id');
 
-            error_log('ID IS: ' .$id );
-
             $stmt->bindParam(':id',$id);
             $stmt->execute();
             $result = $stmt->fetch();
@@ -73,7 +71,6 @@ class PostDatabase
             error_log("ERROR: " . $e->getMessage());
         }
 
-        error_log("Result from query is: " . print_r($result,1));
 
 
         //Populate author model
@@ -93,8 +90,6 @@ class PostDatabase
             $result['post_created_at'],
             $result['post_modified_at'],
             $authorModel);
-
-        error_log("POST MODEL IN DB: " . print_r($postModel,1));
 
         return $postModel;
     }
