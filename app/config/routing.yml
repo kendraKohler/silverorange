@@ -16,7 +16,7 @@ post_id:
 
 delete:
     path: /delete
-    defaults: { _controller: app.post:indexAction }
+    defaults: { _controller: app.delete:indexAction }
     methods: [GET]
 
 import:
