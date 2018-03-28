@@ -38,3 +38,7 @@ services:
     app.post: 
         class: AppBundle\Controller\PostController
         arguments: ["@templating"]
+
+    # import controller set as service
+    app.import: 
+        class: AppBundle\Controller\ImportController
