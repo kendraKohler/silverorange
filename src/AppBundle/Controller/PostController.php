@@ -25,7 +25,6 @@ class PostController
 
     	$allPostsViewData = $this->prepareAllPostsForView($allPosts);
 
-    	error_log('ALL POSTS: '.print_r($allPosts,1));
         return $this->templating->renderResponse('default/post.html.twig',['posts' => $allPostsViewData]);
     }
 
@@ -56,8 +55,6 @@ class PostController
     {
     	$viewData = [];
     	$sortedModels = $this->orderPosts($postModels);
-
-    	error_log('SORTED MODELS: ' . print_r($sortedModels));
 
     	foreach($sortedModels as $currentModel)
     	{
