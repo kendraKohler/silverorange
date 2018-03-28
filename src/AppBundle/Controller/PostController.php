@@ -23,7 +23,7 @@ class PostController
     {
     	$allPosts = $this->postDatabase->getAllPosts();
 
-    	$allPostsViewData = $this->prepareAllPostsForView($postModels);
+    	$allPostsViewData = $this->prepareAllPostsForView($allPosts);
 
     	error_log('ALL POSTS: '.print_r($allPosts,1));
         return $this->templating->renderResponse('default/post.html.twig',$allPostsViewData);
@@ -46,7 +46,8 @@ class PostController
     	$sorted = usort($postModels,
     		function($a,$b)
     		{
-    			return strcmp($a->createdAt(),$b->createdAt());    		})
+    			return strcmp($a->createdAt(),$b->createdAt());    		
+    		});
     }
 
     private function prepareAllPostsForView($postModels)
