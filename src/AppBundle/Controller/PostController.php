@@ -43,11 +43,13 @@ class PostController
 
     private function orderPosts($postModels)
     {
-    	$sorted = usort($postModels,
+    	usort($postModels,
     		function($a,$b)
     		{
     			return strcmp($a->createdAt(),$b->createdAt());    		
     		});
+
+    	return $postModels;
     }
 
     private function prepareAllPostsForView($postModels)
