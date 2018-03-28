@@ -19,6 +19,7 @@ class PostDatabase
 
     public function savePost(PostModel $postModel)
     {
+        error_log('ABOUT TO SAVE POST');
         $exists = $this->checkPostExists($postModel->id());
         error_log('EXISTS IS: ' . $exists);
 
