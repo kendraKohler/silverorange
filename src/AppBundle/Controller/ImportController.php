@@ -52,12 +52,12 @@ class ImportController
 
     	//Issue with symfony constructor work around
     	$postModel->initialize(
-    		$postData->id,
-    		$postData->title,
-    		$postData->body,
-    		$postData->created_at,
-    		$postData->modified_at,
-    		$postData->author);
+    		$data->id,
+    		$data->title,
+    		$data->body,
+    		$data->created_at,
+    		$data->modified_at,
+    		$data->author);
 
     	// Save to database
     	$this->postDatabase->savePost($postModel);
