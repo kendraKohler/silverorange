@@ -48,7 +48,7 @@ class PostDatabase
          * all data is grabbed so the model will contain everything
          * for any future needs.
          */
-        $stmt = $this->connection->query('
+        $stmt = $this->connection->prepare('
             SELECT p.id AS post_id, 
                 p.title AS post_title, 
                 p.body AS post_body, 
@@ -59,9 +59,10 @@ class PostDatabase
                 a.created_at AS author_created_at,
                 a.modified_at AS author_modified_at
             FROM posts p JOIN authors a ON p.author = a.id
-            WHERE p.id = ?');
+            WHERE p.id = :id');
 
-        $result = $stmt->execute([$id]);
+        $stmt->bindParam(':id',$id);
+        $result = $stmt->execute();
 
         error_log('ROW DATA FETCHED ON JOIN: ' . print_r($row,1));
 
