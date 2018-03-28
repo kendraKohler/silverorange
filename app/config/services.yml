@@ -42,7 +42,7 @@ services:
     # post controller set as service
     app.post: 
         class: AppBundle\Controller\PostController
-        arguments: ["@templating","@doctrine.dbal.default_connection"]
+        arguments: ["@templating","@app.database.post"]
 
     # import controller set as service
     app.import: 
