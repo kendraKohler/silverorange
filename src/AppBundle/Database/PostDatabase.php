@@ -47,23 +47,30 @@ class PostDatabase
          * all data is grabbed so the model will contain everything
          * for any future needs.
          */
-        $stmt = $this->connection->prepare('
-            SELECT p.id AS post_id, 
-                p.title AS post_title, 
-                p.body AS post_body, 
-                p.created_at AS post_created_at, 
-                p.modified_at AS post_modified_at, 
-                a.id AS author_id, 
-                a.full_name AS author_full_name,
-                a.created_at AS author_created_at,
-                a.modified_at AS author_modified_at
-            FROM posts p JOIN authors a ON p.author = a.id
-            WHERE p.id = :id');
+        try
+        {
+            $stmt = $this->connection->prepare('
+                SELECT p.id AS post_id, 
+                    p.title AS post_title, 
+                    p.body AS post_body, 
+                    p.created_at AS post_created_at, 
+                    p.modified_at AS post_modified_at, 
+                    a.id AS author_id, 
+                    a.full_name AS author_full_name,
+                    a.created_at AS author_created_at,
+                    a.modified_at AS author_modified_at
+                FROM posts p JOIN authors a ON p.author = a.id
+                WHERE p.id = :id');
 
-        $stmt->bindParam(':id',$id);
-        $stmt->execute();
-        $result = $stmt->fetchAll();
-
+            $stmt->bindParam(':id',$id);
+            $stmt->execute();
+            $result = $stmt->fetchAll();
+        }
+        catch(Exception $e)
+        {
+            error_log("ERROR: " . $e->getMessage());
+        }
+        
         error_log("Result from query is: " . print_r($result,1));
 
 
