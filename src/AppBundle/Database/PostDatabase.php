@@ -59,8 +59,9 @@ class PostDatabase
                 a.modified_at AS author_modified_at
             FROM posts p JOIN authors a ON p.author = a.id
             WHERE p.id = :id');
+
         $stmt->bindParam(':id',$id);
-        $row = $stmt->fetchAll();
+        $result = $stmt->execute();
 
         error_log('ROW DATA FETCHED ON JOIN: ' . print_r($row,1));
 
