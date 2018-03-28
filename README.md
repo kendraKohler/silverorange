@@ -12,6 +12,7 @@ https://silverorange.herokuapp.com/post/{uuid}
 
 Get all posts in reverse chronological order of created at data:
 https://silverorange.herokuapp.com/post
+- If you inspect the html on this page above each title there will be a comment with the created date
 
 A few more things I skipped because of time constraint:
 - Writing tests
