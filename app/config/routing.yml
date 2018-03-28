@@ -7,7 +7,7 @@ post:
     defaults: { _controller: app.post:indexAction }
     methods: [GET]
 
-post:
+post_id:
     path: /post/{id}
     defaults: 
       _controller: app.post:getIdAction
