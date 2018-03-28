@@ -16,8 +16,18 @@ class PostDatabase
 		$this->connection = $connection;
 	}
 
-    public function setPost(PostModel $post)
+    public function savePost(PostModel $postModel)
     {
+        $stmt = $connection->prepare("INSERT INTO posts (id, title, body, created_at, modified_at, author) 
+            VALUES (:id, :title, :body, :created_at, :modified_at, :author)");
 
+        $stmt->bindParam(':id',$postModel->id());
+        $stmt->bindParam(':title',$postModel->title());
+        $stmt->bindParam(':body',$postModel->body());
+        $stmt->bindParam(':created_at',$postModel->createdAt());
+        $stmt->bindParam(':modified_at',$postModel->modifiedAt());
+        $stmt->bindParam(':author',$postModel->author());
+
+        $stmt->execute();
     }
 }

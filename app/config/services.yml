@@ -34,6 +34,11 @@ services:
     #     arguments:
     #         $someArgument: 'some_value'
 
+    # post database service
+    app.database.post: 
+        class: AppBundle\Database\PostDatabase
+        arguments: ["@doctrine.dbal.default_connection"]
+
     # post controller set as service
     app.post: 
         class: AppBundle\Controller\PostController
