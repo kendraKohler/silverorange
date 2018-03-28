@@ -60,7 +60,9 @@ class PostDatabase
                     a.created_at AS author_created_at,
                     a.modified_at AS author_modified_at
                 FROM posts p JOIN authors a ON p.author = a.id
-                WHERE p.id LIKE :id');
+                WHERE p.id = :id');
+            
+            error_log('ID IS: ' .id );
 
             $stmt->bindParam(':id',$id);
             $stmt->execute();
