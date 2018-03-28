@@ -14,7 +14,10 @@ class ImportController
     {
     	// Get json request data as object
     	$jsonData = $request->getContent();
+    	error_log('JSON DATA: ' . print_r($jsonData,1));
+
     	$postData = json_decode($jsonData);
+    	error_log('POST DATA: ' . print_r($postData,1));
 
     	// Create most model using json data
     	$postModel = new PostModel(
