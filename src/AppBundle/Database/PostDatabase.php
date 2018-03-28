@@ -6,6 +6,7 @@ use Doctrine\DBAL\Connection;
 use Doctrine\ORM\Query\ResultSetMapping;
 
 use AppBundle\Model\PostModel;
+use AppBundle\Model\AuthorModel;
 
 class PostDatabase
 {
@@ -40,6 +41,20 @@ class PostDatabase
 
     public function getPostById($id)
     {
+        //Get post and it's author data by id
+        $stmt = $this->connection->query('SELECT * FROM posts p JOIN authors a ON p.author = a.id');
+        $row = $stmt->fetchAll();
+
+        error_log('ROW DATA FETCHED ON JOIN: ' . print_r($row,1));
+
+        //Populate author model
+        //$authorModel = new AuthorModel();
+        //$authorModel->initialize();
+
+        //Populate post model
+        //$postModel = new PostModel();
+            //$model->setId($row['id']);
+        }
         return 'DATABASE FUNCTIONALITY TO BE ADDED';
     }
 }
