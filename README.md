@@ -4,12 +4,9 @@ Silverorange
 Save posts to the database:
 
 The url to post to is - https://silverorange.herokuapp.com/import
-
-It must be a POST, GET will not be accepted.
-
-I have been using https://apitester.com/ for testing.
-
-Note that one or many post files can be accepted at once (takes array of objects or a single object) 
+- It must be a POST, GET will not be accepted.
+- I have been using https://apitester.com/ for testing.
+- Note that one or many post files can be accepted at once (takes array of objects or a single object) 
 
 Get single post by id:
 https://silverorange.herokuapp.com/post/{uuid}
