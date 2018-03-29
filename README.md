@@ -2,9 +2,13 @@ Silverorange
 ========================
 
 Save posts to the database:
+
 The url to post to is - https://silverorange.herokuapp.com/import
-It must be a POST, GET will not be accepted
-I have been using https://apitester.com/ for testing
+
+It must be a POST, GET will not be accepted.
+
+I have been using https://apitester.com/ for testing.
+
 Note that one or many post files can be accepted at once (takes array of objects or a single object) 
 
 Get single post by id:
@@ -26,7 +30,7 @@ A few more things I skipped because of time constraint:
 - There are some comments, but not everything is commented
 
 I would normally use ORM for database handling with Symfony, however I realize the need to see lower 
-level database coding for this test so it was implemented that way.
+level database coding for this test so it was implemented without instead.
 
 I did not remove any of the default skeleton that comes with symfony in, for example "DefaultController"
 
